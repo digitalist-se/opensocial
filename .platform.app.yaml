@@ -33,7 +33,7 @@ disk: 2048
 # The 'mounts' describe writable, persistent filesystem mounts in the application.
 mounts:
   # The default Drupal files directory.
-  '/web/sites/default/files':
+  '/html/sites/default/files':
     source: local
     source_path: 'files'
   # Drupal gets its own dedicated tmp directory. The settings.platformsh.php
@@ -98,7 +98,7 @@ hooks:
   deploy: |
     set -e
     php ./drush/platformsh_generate_drush_yml.php
-    cd web
+    cd html
     drush -y cache-rebuild
     drush -y updatedb
     drush -y config-import
@@ -152,7 +152,7 @@ web:
       allow: true
       expires: 5m
       passthru: '/index.php'
-      root: 'web/sites/default/files'
+      root: 'html/sites/default/files'
 
       # Do not execute PHP scripts from the writeable mount.
       scripts: false
@@ -166,4 +166,4 @@ crons:
   # Run Drupal's cron tasks every 1 hour.
   drupal:
     spec: '0 * * * *'
-    cmd: 'cd web ; drush core-cron'
+    cmd: 'cd html ; drush core-cron'
