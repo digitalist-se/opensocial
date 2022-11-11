@@ -187,3 +187,19 @@ parameters:
     maxAge: false
     # Sets the Access-Control-Allow-Credentials header.
     supportsCredentials: false
+
+  monolog.channel_handlers:
+    # Log to a file by default.
+    default:
+    # Send the php channel to web server's error log and the browser console:
+    php: ['error_log']
+    # Ignore log entries of "content" channel.
+    # content: ['null']
+    # Show memory usage on each log entry:
+    monolog.processors: [ 'message_placeholder', 'current_user', 'request_uri', 'memory_usage', 'web' ]
+
+  services:
+    # Monolog handlers.
+    monolog.handler.file:
+      class: Monolog\Handler\RotatingFileHandler
+      arguments: [ '../logs/application.log', '30', '200', false ]

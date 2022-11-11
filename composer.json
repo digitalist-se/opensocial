@@ -62,5 +62,14 @@
         "patchLevel": {
             "drupal/core": "-p2"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "zaporylie/composer-drupal-optimizations": true,
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "cweagans/composer-patches": true,
+            "oomphinc/composer-installers-extender": true
+        }
     }
 }
